@@ -2,31 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\languaje;
 use Illuminate\Http\Request;
-use App\models\Platform;
 
-class PlatformController extends Controller
+class LanguajeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
-    {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('home')->with('plataformas',$plataformas);
-
-    }
-
     public function index()
     {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('Platform/index')->with('plataformas',$plataformas);
-
+        $idiomas = languaje::simplePaginate(5);
+        return view('Lenguaje/index')->with('idiomas',$idiomas);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +25,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        return view('Platform/create');
+        return view('Lenguaje/create');
     }
 
     /**
@@ -45,11 +36,11 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $plataforma =new Platform();
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
-
-        return redirect('/plataformas');
+        $idioma =new languaje();
+        $idioma->name=$request->get('name');
+        $idioma->codigoISO=$request->get('codigoISO');
+        $idioma->save();
+        return redirect('/lenguajes');
     }
 
     /**
@@ -71,8 +62,8 @@ class PlatformController extends Controller
      */
     public function edit($id)
     {
-        $plataforma = Platform::find($id);
-        return view('Platform/edit')->with('plataforma',$plataforma);
+        $idioma = languaje::find($id);
+        return view('Lenguaje/edit')->with('idioma',$idioma);
     }
 
     /**
@@ -84,11 +75,12 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $idioma = languaje::find($id);
+        $idioma->name = $request->get('name');
+        $idioma->codigoISO = $request->get('codigoISO');
+        $idioma->save();
+        return redirect('/lenguajes');
 
-        return redirect('/plataformas');
     }
 
     /**
@@ -99,8 +91,8 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->delete();
-        return redirect('/plataformas');
+        $idioma= languaje::find($id);
+        $idioma->delete();
+        return redirect('/lenguajes');
     }
 }

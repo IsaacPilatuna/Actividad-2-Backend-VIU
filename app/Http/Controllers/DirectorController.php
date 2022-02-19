@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Director;
 use Illuminate\Http\Request;
-use App\models\Platform;
 
-class PlatformController extends Controller
+
+class DirectorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
-    {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('home')->with('plataformas',$plataformas);
-
-    }
-
     public function index()
     {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('Platform/index')->with('plataformas',$plataformas);
-
+        $directores = Director::simplePaginate(5);;
+        return view('Director/index')->with('directores',$directores);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +26,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        return view('Platform/create');
+        return view('Director/create');
     }
 
     /**
@@ -45,11 +37,13 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $plataforma =new Platform();
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
-
-        return redirect('/plataformas');
+        $director =new Director();
+        $director->name=$request->get('name');
+        $director->apellidos=$request->get('surname');
+        $director->borndate=$request->get('borndate');
+        $director->nacionalidad=$request->get('nationality');
+        $director->save();
+        return redirect('/directores');
     }
 
     /**
@@ -71,8 +65,8 @@ class PlatformController extends Controller
      */
     public function edit($id)
     {
-        $plataforma = Platform::find($id);
-        return view('Platform/edit')->with('plataforma',$plataforma);
+        $director = Director::find($id);
+        return view('Director/edit')->with('director',$director);
     }
 
     /**
@@ -84,11 +78,14 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $director = Director::find($id);
+        $director->name = $request->get('name');
+        $director->apellidos = $request->get('surname');
+        $director->borndate = $request->get('borndate');
+        $director->nacionalidad = $request->get('nationality');
+        $director->save();
+        return redirect('/directores');
 
-        return redirect('/plataformas');
     }
 
     /**
@@ -99,8 +96,8 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->delete();
-        return redirect('/plataformas');
+        $director= Director::find($id);
+        $director->delete();
+        return redirect('/directores');
     }
 }

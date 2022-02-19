@@ -2,31 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use Illuminate\Http\Request;
-use App\models\Platform;
 
-class PlatformController extends Controller
+class ActorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
-    {
 
-        $plataformas = Platform::simplePaginate(5);
-        return view('home')->with('plataformas',$plataformas);
-
-    }
 
     public function index()
     {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('Platform/index')->with('plataformas',$plataformas);
-
+        $actores = Actor::simplePaginate(5);
+        return view('Actors/index')->with('actores',$actores);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +27,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        return view('Platform/create');
+        return view('Actors/create');
     }
 
     /**
@@ -45,11 +38,13 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $plataforma =new Platform();
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
-
-        return redirect('/plataformas');
+        $actor =new Actor();
+        $actor->name=$request->get('name');
+        $actor->apellidos=$request->get('surname');
+        $actor->borndate=$request->get('borndate');
+        $actor->nacionalidad=$request->get('nationality');
+        $actor->save();
+        return redirect('/actores');
     }
 
     /**
@@ -71,8 +66,8 @@ class PlatformController extends Controller
      */
     public function edit($id)
     {
-        $plataforma = Platform::find($id);
-        return view('Platform/edit')->with('plataforma',$plataforma);
+        $actor = Actor::find($id);
+        return view('Actors/edit')->with('actor',$actor);
     }
 
     /**
@@ -84,12 +79,16 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $actor = actor::find($id);
+        $actor->name = $request->get('name');
+        $actor->apellidos = $request->get('surname');
+        $actor->borndate = $request->get('borndate');
+        $actor->nacionalidad = $request->get('nationality');
+        $actor->save();
+        return redirect('/actores');
 
-        return redirect('/plataformas');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -99,8 +98,8 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->delete();
-        return redirect('/plataformas');
+        $actor= Actor::find($id);
+        $actor->delete();
+        return redirect('/actores');
     }
 }

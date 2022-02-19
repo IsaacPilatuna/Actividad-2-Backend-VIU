@@ -2,31 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
-use App\models\Platform;
 
-class PlatformController extends Controller
+class SerieController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
-    {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('home')->with('plataformas',$plataformas);
-
-    }
-
     public function index()
     {
-
-        $plataformas = Platform::simplePaginate(5);
-        return view('Platform/index')->with('plataformas',$plataformas);
-
+        $series = Serie::simplePaginate(5);
+        return view('Serie/index')->with('series',$series);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +25,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        return view('Platform/create');
+        return view('Serie/create');
     }
 
     /**
@@ -45,11 +36,13 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $plataforma =new Platform();
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $serie =new Serie();
+        $serie->titulo=$request->get('titulo');
+        $serie->idPlataforma=$request->get('idPlataforma');
+        $serie->idDirector=$request->get('idDirector');
+        $serie->save();
+        return redirect('/series');
 
-        return redirect('/plataformas');
     }
 
     /**
@@ -71,8 +64,8 @@ class PlatformController extends Controller
      */
     public function edit($id)
     {
-        $plataforma = Platform::find($id);
-        return view('Platform/edit')->with('plataforma',$plataforma);
+        $serie = Serie::find($id);
+        return view('Serie/edit')->with('serie',$serie);
     }
 
     /**
@@ -84,11 +77,14 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
 
-        return redirect('/plataformas');
+        $serie = Serie::find($id);
+        $serie->titulo=$request->get('titulo');
+        $serie->idPlataforma=$request->get('idPlataforma');
+        $serie->idDirector=$request->get('idDirector');
+        $serie->save();
+        return redirect('/series');
+
     }
 
     /**
@@ -99,8 +95,10 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->delete();
-        return redirect('/plataformas');
+
+        $serie= Serie::find($id);
+        $serie->delete();
+        return redirect('/series');
+
     }
 }
