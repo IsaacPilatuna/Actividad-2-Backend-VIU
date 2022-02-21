@@ -21,7 +21,7 @@ use App\Http\Controllers\SerieController;
 */
 
 
-route::get('/','App\Http\Controllers\PlatformController@home');
+route::match(['get','post'],'/','App\Http\Controllers\PlatformController@home');
 Route::prefix('login')->group(function(){
     route::get('/',['as'=>'login','uses'=>'App\Http\Controllers\AuthController@login']);
     route::post('/','App\Http\Controllers\AuthController@authenticate');
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(
         route::get('/logout','App\Http\Controllers\AuthController@logout');
 
         Route::controller(PlatformController::class)->prefix('platforms')->group(function(){
-            route::get('/','index');
+            route::match(['get','post'],'/','index');
             route::get('/create','create');
             route::post('/store','store');
             route::get('/edit/{id}','edit');
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(
         });
 
         Route::controller(ActorController::class)->prefix('actors')->group(function(){
-            route::get('/','index');
+            route::match(['get','post'],'/','index');
             route::get('/create','create');
             route::post('/store','store');
             route::get('/edit/{id}','edit');
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(
         });
 
         Route::controller(DirectorController::class)->prefix('directors')->group(function(){
-            route::get('/','index');
+            route::match(['get','post'],'/','index');
             route::get('/create','create');
             route::post('/store','store');
             route::get('/edit/{id}','edit');
@@ -59,8 +59,8 @@ Route::middleware(['auth'])->group(
             route::delete('/delete/{id}','destroy');
         });
 
-        Route::controller(LanguajeController::class)->prefix('languages')->group(function(){
-            route::get('/','index');
+        Route::controller(LanguageController::class)->prefix('languages')->group(function(){
+            route::match(['get','post'],'/','index');
             route::get('/create','create');
             route::post('/store','store');
             route::get('/edit/{id}','edit');
@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(
         });
 
         Route::controller(SerieController::class)->prefix('series')->group(function(){
-            route::get('/','index');
+            route::match(['get','post'],'/','index');
             route::get('/create','create');
             route::post('/store','store');
             route::delete('/delete/{id}','destroy');

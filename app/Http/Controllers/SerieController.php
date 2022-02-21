@@ -19,17 +19,33 @@ class SerieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $series = Serie::with(['director','platform','actors','audios','subtitles'])->simplePaginate(5);
-            return view('Series/index')->with('series',$series);
-
+            $searchString=null;
+            if($request->has('searchString')){
+                $searchString = $request->searchString;
+                $series = Serie::with(['director','platform','actors','audios','subtitles'])
+                ->where('title','like','%'.$searchString.'%')
+                ->orWhereHas('director', function ($query) use($searchString) {
+                    return $query->where('firstName','like','%'.$searchString.'%')->orWhere('lastName','like','%'.$searchString.'%');
+                })
+                ->orWhereHas('actors', function ($query) use($searchString) {
+                    return $query->where('firstName','like','%'.$searchString.'%')->orWhere('lastName','like','%'.$searchString.'%');
+                })
+                ->orWhereHas('platform', function ($query) use($searchString) {
+                    return $query->where('name','like','%'.$searchString.'%');
+                })
+                ->paginate(5);
+            }else{
+                $series = Serie::with(['director','platform','actors','audios','subtitles'])->paginate(5);
+            }
+            return view('Series/index',['series'=>$series, 'searchString'=>$searchString]);
         }catch (\Throwable $th) {
             return back()->withErrors([
-                'error' =>  Lang::get('alerts.failed_read')
+                'error' =>  $th->getMessage()
             ]);
-    }
+        }
     }
 
 

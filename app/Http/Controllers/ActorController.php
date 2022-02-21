@@ -9,11 +9,21 @@ use Illuminate\Support\Facades\Lang;
 class ActorController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $actors = Actor::simplePaginate(5);
-            return view('Actors/index')->with('actors',$actors);
+            $searchString=null;
+            if($request->has('searchString')){
+                $searchString = $request->searchString;
+                $actors = Actor::where('firstName','like','%'.$searchString.'%')
+                ->orWhere('lastName','like','%'.$searchString.'%')
+                ->orWhere('dateOfBirth','like','%'.$searchString.'%')
+                ->orWhere('nationality','like','%'.$searchString.'%')
+                ->paginate(5);
+            }else{
+                $actors = Actor::paginate(5);
+            }
+            return view('Actors/index',['actors'=>$actors, 'searchString'=>$searchString]);
         }catch (\Throwable $th) {
             return back()->withErrors([
                 'error' =>  Lang::get('alerts.failed_read')

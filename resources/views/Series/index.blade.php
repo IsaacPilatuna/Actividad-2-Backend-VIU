@@ -3,13 +3,22 @@
 <div class="card">
     <div class="card-header">
         <h2>Series</h2>
-    </div>
-    <div class="card-body">
         <div class="buttons-container">
             <a class="btn btn-primary" href="series/create">
                 <i class="bi bi-plus-circle"></i> Crear
             </a>
         </div>
+    </div>
+    <div class="card-body">
+        <form action="/series" method="POST">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar series" name="searchString" value="{{$searchString}}">
+                <div class="input-group-prepend">
+                    <button class="input-group-text"><i class="bi bi-search"></i> </button>
+                </div>
+            </div>
+        </form>
         <table class="table table-striped table-bordered">
             <thead class="thead-light">
                 <tr>
@@ -62,6 +71,11 @@
                     </td>
                 </tr>
                 @endforeach
+                @if (count($series) === 0)
+                <tr>
+                    <td colspan="7" class="no-results">No se han encontrado resultados</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

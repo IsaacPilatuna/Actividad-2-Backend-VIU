@@ -90,6 +90,8 @@ table.table th{
 }
 
 .form-group{
+    display: flex;
+    justify-content: center;
     margin-bottom: .5rem;
 }
 
@@ -102,3 +104,21 @@ tbody tr:hover{
     margin-bottom: 0;
 }
 
+.page-item.active .page-link{
+    background-color: navy;
+    border-color: navy;
+}
+
+.page-link{
+    color: navy;
+}
+
+.form-control{
+max-width: 512px;
+}
+
+.no-results{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

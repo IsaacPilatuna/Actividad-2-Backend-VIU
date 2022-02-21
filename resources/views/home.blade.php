@@ -7,6 +7,15 @@
         <h1>Plataformas disponibles</h1>
     </div>
     <div class="card-body">
+        <form  action="/" method="POST">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar plataformas" name="searchString" value="{{$searchString}}">
+                <div class="input-group-prepend">
+                    <button class="input-group-text"><i class="bi bi-search"></i> </button>
+                </div>
+            </div>
+        </form>
         <table class="table table-striped table-bordered">
             <thead class="thead-light">
                 <tr>
@@ -21,6 +30,11 @@
                     <td>{{$platform->name}}</td>
                 </tr>
                 @endforeach
+                @if (count($platforms) === 0)
+                <tr>
+                    <td colspan="2" class="no-results">No se han encontrado resultados</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

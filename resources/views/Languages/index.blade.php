@@ -3,13 +3,22 @@
 <div class="card">
     <div class="card-header">
         <h2>Idiomas</h2>
-    </div>
-    <div class="card-body">
         <div class="buttons-container">
             <a class="btn btn-primary" href="languages/create">
                 <i class="bi bi-plus-circle"></i> Crear
             </a>
         </div>
+    </div>
+    <div class="card-body">
+        <form  action="/languages" method="POST">
+            @csrf
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar idiomas" name="searchString" value="{{$searchString}}">
+                <div class="input-group-prepend">
+                    <button class="input-group-text"><i class="bi bi-search"></i> </button>
+                </div>
+            </div>
+        </form>
         <table class="table  table-striped table-bordered">
             <thead class="thead-light">
                 <tr>
@@ -41,6 +50,11 @@
                     </td>
                 </tr>
                 @endforeach
+                @if (count($languages) === 0)
+                <tr>
+                    <td colspan="4" class="no-results">No se han encontrado resultados</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>

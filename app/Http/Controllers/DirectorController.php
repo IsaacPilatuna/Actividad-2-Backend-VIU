@@ -8,16 +8,21 @@ use Illuminate\Support\Facades\Lang;
 
 class DirectorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
         try{
-            $director = Director::simplePaginate(5);;
-            return view('Directors/index')->with('directors',$director);
+            $searchString=null;
+            if($request->has('searchString')){
+                $searchString = $request->searchString;
+                $directors = Director::where('firstName','like','%'.$searchString.'%')
+                ->orWhere('lastName','like','%'.$searchString.'%')
+                ->orWhere('dateOfBirth','like','%'.$searchString.'%')
+                ->orWhere('nationality','like','%'.$searchString.'%')
+                ->paginate(5);
+            }else{
+                $directors = Director::paginate(5);
+            }
+            return view('Directors/index',['directors'=>$directors, 'searchString'=>$searchString]);
         }catch (\Throwable $th) {
             return back()->withErrors([
                 'error' =>  Lang::get('alerts.failed_read')
@@ -25,22 +30,11 @@ class DirectorController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('Directors/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try{
@@ -58,36 +52,13 @@ class DirectorController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $director = Director::find($id);
         return view('Directors/edit')->with('director',$director);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try{
@@ -106,12 +77,6 @@ class DirectorController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try{

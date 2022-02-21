@@ -8,16 +8,24 @@ use Illuminate\Support\Facades\Lang;
 
 class PlatformController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function home()
+    public function console_log( $data ){
+      echo '<script>';
+      echo 'console.log('. json_encode( $data ) .')';
+      echo '</script>';
+    }
+
+    public function home(Request $request)
     {
         try{
-            $platforms = Platform::simplePaginate(5);
-            return view('home')->with('platforms',$platforms);
+            $searchString=null;
+            if($request->has('searchString')){
+                $searchString = $request->searchString;
+                $platforms = Platform::where('name','like','%'.$searchString.'%')
+                ->paginate(5);
+            }else{
+                $platforms = Platform::paginate(5);
+            }
+            return view('home',['platforms'=>$platforms, 'searchString'=>$searchString]);
         }catch (\Throwable $th) {
             return back()->withErrors([
                 'error' =>  Lang::get('alerts.failed_read')
@@ -26,11 +34,23 @@ class PlatformController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
-
-        $platforms = Platform::simplePaginate(5);
-        return view('Platforms/index')->with('platforms',$platforms);
+        try{
+            $searchString=null;
+            if($request->has('searchString')){
+                $searchString = $request->searchString;
+                $platforms = Platform::where('name','like','%'.$searchString.'%')
+                ->paginate(5);
+            }else{
+                $platforms = Platform::paginate(5);
+            }
+            return view('Platforms\index',['platforms'=>$platforms, 'searchString'=>$searchString]);
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed_read')
+            ]);
+        }
 
     }
     /**
