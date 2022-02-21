@@ -1,0 +1,87 @@
+
+body.body{
+    background-image: url("../images/pattern.png");
+}
+.thead-light{
+    background-color: lightgray;
+}
+
+.buttons-container{
+    padding: .25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.module{
+    min-height: 100vh;
+    background: url("./Images/pattern.png");
+}
+
+.container{
+    padding-top: 1rem;
+}
+
+.card{
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+	border: 1px solid lightgray;
+	box-shadow: 4px 4px 8px black;
+}
+
+.card-header{
+    text-align: center;
+}
+
+table.table{
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.form-container{
+    padding: 2rem;
+}
+
+.buttons-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+table.table th{
+    width: 10%;
+    text-align: center;
+}
+
+.self-right{
+    margin-left: auto;
+}
+
+.btn-lg{
+    font-size: 1.5rem;
+}
+
+.btn-primary{
+    background-color: navy;
+    border-color: navy;
+}
+
+.btn-outline-primary{
+    color: navy;
+    border-color: navy;
+}
+
+.btn-outline-primary:hover{
+    background-color: navy;
+    color: white;
+}
+
+.form-group{
+    margin-bottom: .5rem;
+}
+
+tbody tr:hover{
+    background-color: rgba(51, 224, 255, 0.25);
+}

@@ -15,8 +15,8 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $directores = Director::simplePaginate(5);;
-        return view('Director/index')->with('directores',$directores);
+        $director = Director::simplePaginate(5);;
+        return view('Directors/index')->with('directors',$director);
     }
 
     /**
@@ -26,7 +26,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        return view('Director/create');
+        return view('Directors/create');
     }
 
     /**
@@ -38,12 +38,12 @@ class DirectorController extends Controller
     public function store(Request $request)
     {
         $director =new Director();
-        $director->name=$request->get('name');
-        $director->apellidos=$request->get('surname');
-        $director->borndate=$request->get('borndate');
-        $director->nacionalidad=$request->get('nationality');
+        $director->firstName=$request->get('firstName');
+        $director->lastName=$request->get('lastName');
+        $director->dateOfBirth=$request->get('dateOfBirth');
+        $director->nationality=$request->get('nationality');
         $director->save();
-        return redirect('/directores');
+        return redirect('/directors');
     }
 
     /**
@@ -66,7 +66,7 @@ class DirectorController extends Controller
     public function edit($id)
     {
         $director = Director::find($id);
-        return view('Director/edit')->with('director',$director);
+        return view('Directors/edit')->with('director',$director);
     }
 
     /**
@@ -79,12 +79,12 @@ class DirectorController extends Controller
     public function update(Request $request, $id)
     {
         $director = Director::find($id);
-        $director->name = $request->get('name');
-        $director->apellidos = $request->get('surname');
-        $director->borndate = $request->get('borndate');
-        $director->nacionalidad = $request->get('nationality');
+        $director->firstName = $request->get('firstName');
+        $director->lastName = $request->get('lastName');
+        $director->dateOfBirth = $request->get('dateOfBirth');
+        $director->nationality = $request->get('nationality');
         $director->save();
-        return redirect('/directores');
+        return redirect('/directors');
 
     }
 
@@ -98,6 +98,6 @@ class DirectorController extends Controller
     {
         $director= Director::find($id);
         $director->delete();
-        return redirect('/directores');
+        return redirect('/directors');
     }
 }

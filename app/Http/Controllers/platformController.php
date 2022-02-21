@@ -15,16 +15,16 @@ class PlatformController extends Controller
     public function home()
     {
 
-        $plataformas = Platform::simplePaginate(5);
-        return view('home')->with('plataformas',$plataformas);
+        $platforms = Platform::simplePaginate(5);
+        return view('home')->with('platforms',$platforms);
 
     }
 
     public function index()
     {
 
-        $plataformas = Platform::simplePaginate(5);
-        return view('Platform/index')->with('plataformas',$plataformas);
+        $platforms = Platform::simplePaginate(5);
+        return view('Platforms/index')->with('platforms',$platforms);
 
     }
     /**
@@ -34,7 +34,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        return view('Platform/create');
+        return view('Platforms/create');
     }
 
     /**
@@ -45,11 +45,11 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $plataforma =new Platform();
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $platform =new Platform();
+        $platform->name=$request->get('name');
+        $platform->save();
 
-        return redirect('/plataformas');
+        return redirect('/platforms');
     }
 
     /**
@@ -71,8 +71,8 @@ class PlatformController extends Controller
      */
     public function edit($id)
     {
-        $plataforma = Platform::find($id);
-        return view('Platform/edit')->with('plataforma',$plataforma);
+        $platform = Platform::find($id);
+        return view('Platforms/edit')->with('platform',$platform);
     }
 
     /**
@@ -84,11 +84,11 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->name=$request->get('name');
-        $plataforma->save();
+        $platform = Platform::find($id);
+        $platform->name=$request->get('name');
+        $platform->save();
 
-        return redirect('/plataformas');
+        return redirect('/platforms');
     }
 
     /**
@@ -99,8 +99,8 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $plataforma = Platform::find($id);
-        $plataforma->delete();
-        return redirect('/plataformas');
+        $platform = Platform::find($id);
+        $platform->delete();
+        return redirect('/platforms');
     }
 }

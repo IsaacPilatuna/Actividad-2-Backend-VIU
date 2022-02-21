@@ -1,28 +1,32 @@
-@extends('plantillabase')
+@extends('base-template')
 
-@section('contenido')
+@section('content')
 
-    <table class="table table-dark table striped mt -4">
+<div class="card">
+    <div class="card-header text-center">
+        <h1>Plataformas disponibles</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($platforms as $platform)
+                <tr>
+                    <td>{{$platform->id}}</td>
+                    <td>{{$platform->name}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">name</th>
-        </tr>
-
-        </thead>
-        <tbody>
-        @foreach($plataformas as $alm)
-            <tr>
-                <td>{{$alm->id}}</td>
-                <td>{{$alm->name}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    {{$plataformas->links('')}}
+{{$platforms->links('')}}
 
 
 @endsection()
-

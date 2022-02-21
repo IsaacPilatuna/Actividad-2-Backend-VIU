@@ -16,8 +16,8 @@ class ActorController extends Controller
 
     public function index()
     {
-        $actores = Actor::simplePaginate(5);
-        return view('Actors/index')->with('actores',$actores);
+        $actors = Actor::simplePaginate(5);
+        return view('Actors/index')->with('actors',$actors);
     }
 
     /**
@@ -39,12 +39,12 @@ class ActorController extends Controller
     public function store(Request $request)
     {
         $actor =new Actor();
-        $actor->name=$request->get('name');
-        $actor->apellidos=$request->get('surname');
-        $actor->borndate=$request->get('borndate');
-        $actor->nacionalidad=$request->get('nationality');
+        $actor->firstName=$request->get('firstName');
+        $actor->lastName=$request->get('lastName');
+        $actor->dateOfBirth=$request->get('dateOfBirth');
+        $actor->nationality=$request->get('nationality');
         $actor->save();
-        return redirect('/actores');
+        return redirect('/actors');
     }
 
     /**
@@ -80,12 +80,12 @@ class ActorController extends Controller
     public function update(Request $request, $id)
     {
         $actor = actor::find($id);
-        $actor->name = $request->get('name');
-        $actor->apellidos = $request->get('surname');
-        $actor->borndate = $request->get('borndate');
-        $actor->nacionalidad = $request->get('nationality');
+        $actor->firstName = $request->get('firstName');
+        $actor->lastName = $request->get('lastName');
+        $actor->dateOfBirth = $request->get('dateOfBirth');
+        $actor->nationality = $request->get('nationality');
         $actor->save();
-        return redirect('/actores');
+        return redirect('/actors');
 
     }
 
@@ -100,6 +100,6 @@ class ActorController extends Controller
     {
         $actor= Actor::find($id);
         $actor->delete();
-        return redirect('/actores');
+        return redirect('/actors');
     }
 }

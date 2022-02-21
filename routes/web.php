@@ -16,33 +16,33 @@ use Illuminate\Support\Facades\Route;
 
 
 route::get('/','App\Http\Controllers\PlatformController@home');
-route::get('/plataformas','App\Http\Controllers\PlatformController@index');
-route::get('/plataformas/create','App\Http\Controllers\PlatformController@create');
-route::post('/plataformas/store','App\Http\Controllers\PlatformController@store');
-route::get('/plataformas/edit/{id}','App\Http\Controllers\PlatformController@edit');
-route::put('/plataformas/update/{id}','App\Http\Controllers\PlatformController@update');
-route::delete('/plataformas/delete/{id}','App\Http\Controllers\PlatformController@destroy');
+route::get('/platforms','App\Http\Controllers\PlatformController@index');
+route::get('/platforms/create','App\Http\Controllers\PlatformController@create');
+route::post('/platforms/store','App\Http\Controllers\PlatformController@store');
+route::get('/platforms/edit/{id}','App\Http\Controllers\PlatformController@edit');
+route::put('/platforms/update/{id}','App\Http\Controllers\PlatformController@update');
+route::delete('/platforms/delete/{id}','App\Http\Controllers\PlatformController@destroy');
 
-route::get('/actores','App\Http\Controllers\ActorController@index');
-route::get('/actores/create','App\Http\Controllers\ActorController@create');
-route::post('/actores/store','App\Http\Controllers\ActorController@store');
-route::get('/actores/edit/{id}','App\Http\Controllers\ActorController@edit');
-route::put('/actores/update/{id}','App\Http\Controllers\ActorController@update');
-route::delete('/actores/delete/{id}','App\Http\Controllers\ActorController@destroy');
+route::get('/actors','App\Http\Controllers\ActorController@index');
+route::get('/actors/create','App\Http\Controllers\ActorController@create');
+route::post('/actors/store','App\Http\Controllers\ActorController@store');
+route::get('/actors/edit/{id}','App\Http\Controllers\ActorController@edit');
+route::put('/actors/update/{id}','App\Http\Controllers\ActorController@update');
+route::delete('/actors/delete/{id}','App\Http\Controllers\ActorController@destroy');
 
-route::get('/directores','App\Http\Controllers\DirectorController@index');
-route::get('/directores/create','App\Http\Controllers\DirectorController@create');
-route::post('/directores/store','App\Http\Controllers\DirectorController@store');
-route::get('/directores/edit/{id}','App\Http\Controllers\DirectorController@edit');
-route::put('/directores/update/{id}','App\Http\Controllers\DirectorController@update');
-route::delete('/directores/delete/{id}','App\Http\Controllers\DirectorController@destroy');
+route::get('/directors','App\Http\Controllers\DirectorController@index');
+route::get('/directors/create','App\Http\Controllers\DirectorController@create');
+route::post('/directors/store','App\Http\Controllers\DirectorController@store');
+route::get('/directors/edit/{id}','App\Http\Controllers\DirectorController@edit');
+route::put('/directors/update/{id}','App\Http\Controllers\DirectorController@update');
+route::delete('/directors/delete/{id}','App\Http\Controllers\DirectorController@destroy');
 
-route::get('/lenguajes','App\Http\Controllers\LanguajeController@index');
-route::get('/lenguajes/create','App\Http\Controllers\LanguajeController@create');
-route::post('/lenguajes/store','App\Http\Controllers\LanguajeController@store');
-route::get('/lenguajes/edit/{id}','App\Http\Controllers\LanguajeController@edit');
-route::put('/lenguajes/update/{id}','App\Http\Controllers\LanguajeController@update');
-route::delete('/lenguajes/delete/{id}','App\Http\Controllers\LanguajeController@destroy');
+route::get('/languages','App\Http\Controllers\LanguajeController@index');
+route::get('/languages/create','App\Http\Controllers\LanguajeController@create');
+route::post('/languages/store','App\Http\Controllers\LanguajeController@store');
+route::get('/languages/edit/{id}','App\Http\Controllers\LanguajeController@edit');
+route::put('/languages/update/{id}','App\Http\Controllers\LanguajeController@update');
+route::delete('/languages/delete/{id}','App\Http\Controllers\LanguajeController@destroy');
 
 route::get('/series','App\Http\Controllers\SerieController@index');
 route::get('/series/create','App\Http\Controllers\SerieController@create');

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\languaje;
+use App\Models\Language;
+use App\Models\Languaje;
 use Illuminate\Http\Request;
 
 class LanguajeController extends Controller
@@ -14,8 +15,8 @@ class LanguajeController extends Controller
      */
     public function index()
     {
-        $idiomas = languaje::simplePaginate(5);
-        return view('Lenguaje/index')->with('idiomas',$idiomas);
+        $languages = Language::simplePaginate(5);
+        return view('Languages/index')->with('languages',$languages);
     }
 
     /**
@@ -25,7 +26,7 @@ class LanguajeController extends Controller
      */
     public function create()
     {
-        return view('Lenguaje/create');
+        return view('Languages/create');
     }
 
     /**
@@ -36,11 +37,11 @@ class LanguajeController extends Controller
      */
     public function store(Request $request)
     {
-        $idioma =new languaje();
-        $idioma->name=$request->get('name');
-        $idioma->codigoISO=$request->get('codigoISO');
-        $idioma->save();
-        return redirect('/lenguajes');
+        $language =new Language();
+        $language->name=$request->get('name');
+        $language->isoCode=$request->get('isoCode');
+        $language->save();
+        return redirect('/languages');
     }
 
     /**
@@ -62,8 +63,8 @@ class LanguajeController extends Controller
      */
     public function edit($id)
     {
-        $idioma = languaje::find($id);
-        return view('Lenguaje/edit')->with('idioma',$idioma);
+        $language = Language::find($id);
+        return view('Languages/edit')->with('language',$language);
     }
 
     /**
@@ -75,11 +76,11 @@ class LanguajeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $idioma = languaje::find($id);
-        $idioma->name = $request->get('name');
-        $idioma->codigoISO = $request->get('codigoISO');
-        $idioma->save();
-        return redirect('/lenguajes');
+        $language = Language::find($id);
+        $language->name = $request->get('name');
+        $language->isoCode = $request->get('isoCode');
+        $language->save();
+        return redirect('/languages');
 
     }
 
@@ -91,8 +92,8 @@ class LanguajeController extends Controller
      */
     public function destroy($id)
     {
-        $idioma= languaje::find($id);
-        $idioma->delete();
-        return redirect('/lenguajes');
+        $language= Language::find($id);
+        $language->delete();
+        return redirect('/languages');
     }
 }

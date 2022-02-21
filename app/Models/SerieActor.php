@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Actor extends Model
+class SerieActor extends Model
 {
-    protected $table = 'actors';
+    protected $table = 'seriesactors';
 }

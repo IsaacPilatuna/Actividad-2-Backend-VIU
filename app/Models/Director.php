@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
 class Director extends Model
 {
 
-    protected $table = 'director';
+    protected $table = 'directors';
 
 }

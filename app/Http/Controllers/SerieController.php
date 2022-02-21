@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
+use App\Models\Director;
+use App\Models\Language;
+use App\Models\Platform;
 use App\Models\Serie;
+use App\Models\SerieActor;
+use App\Models\SerieLanguage;
 use Illuminate\Http\Request;
 
 class SerieController extends Controller
 {
+    public function console_log( $data ){
+      echo '<script>';
+      echo 'console.log('. json_encode( $data ) .')';
+      echo '</script>';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +25,12 @@ class SerieController extends Controller
      */
     public function index()
     {
-        $series = Serie::simplePaginate(5);
-        return view('Serie/index')->with('series',$series);
+        $series = Serie::with(['director','platform','actors','audios','subtitles'])->simplePaginate(5);
+
+        $this->console_log($series);
+        return view('Series/index')->with('series',$series);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +39,11 @@ class SerieController extends Controller
      */
     public function create()
     {
-        return view('Serie/create');
+        $directors = Director::all();
+        $actors = Actor::all();
+        $platforms = Platform::all();
+        $languages = Language::all();
+        return view('Series/create')->with('directors',$directors)->with('platforms',$platforms)->with('actors',$actors)->with('languages',$languages);
     }
 
     /**
@@ -37,10 +55,37 @@ class SerieController extends Controller
     public function store(Request $request)
     {
         $serie =new Serie();
-        $serie->titulo=$request->get('titulo');
-        $serie->idPlataforma=$request->get('idPlataforma');
-        $serie->idDirector=$request->get('idDirector');
+        $serie->title=$request->get('title');
+        $serie->platformId=$request->get('platform');
+        $serie->directorId=$request->get('director');
         $serie->save();
+
+        $actors = $request->get('actors');
+        foreach ($actors as  $actor) {
+            $serieActor = new SerieActor();
+            $serieActor->actorId=$actor;
+            $serieActor->serieId=$serie->id;
+            $serieActor->save();
+        }
+
+        $audios = $request->get('audios');
+        foreach ($audios as  $audio) {
+            $serieLanguage = new SerieLanguage();
+            $serieLanguage->languageId=$audio;
+            $serieLanguage->serieId=$serie->id;
+            $serieLanguage->type="Audio";
+            $serieLanguage->save();
+        }
+
+        $subtitles = $request->get('subtitles');
+        foreach ($subtitles as  $subtitle) {
+            $serieLanguage = new SerieLanguage();
+            $serieLanguage->languageId=$subtitle;
+            $serieLanguage->serieId=$serie->id;
+            $serieLanguage->type="Subtítulo";
+            $serieLanguage->save();
+        }
+
         return redirect('/series');
 
     }
@@ -65,7 +110,7 @@ class SerieController extends Controller
     public function edit($id)
     {
         $serie = Serie::find($id);
-        return view('Serie/edit')->with('serie',$serie);
+        return view('Series/edit')->with('serie',$serie);
     }
 
     /**
@@ -79,9 +124,9 @@ class SerieController extends Controller
     {
 
         $serie = Serie::find($id);
-        $serie->titulo=$request->get('titulo');
-        $serie->idPlataforma=$request->get('idPlataforma');
-        $serie->idDirector=$request->get('idDirector');
+        $serie->title=$request->get('title');
+        $serie->platformId=$request->get('platformId');
+        $serie->directorId=$request->get('directorId');
         $serie->save();
         return redirect('/series');
 
