@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class usuarios extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,7 +20,7 @@ class usuarios extends Seeder
             'password' => bcrypt('password'),
         ]);
         DB::table('users')->insert([
-            'name' => 'user2',
+            'name' => 'User2',
             'email' => 'user2@email.com',
             'password' => bcrypt('password'),
         ]);

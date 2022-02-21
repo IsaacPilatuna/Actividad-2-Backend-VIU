@@ -13,11 +13,6 @@ use Illuminate\Http\Request;
 
 class SerieController extends Controller
 {
-    public function console_log( $data ){
-      echo '<script>';
-      echo 'console.log('. json_encode( $data ) .')';
-      echo '</script>';
-    }
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +21,6 @@ class SerieController extends Controller
     public function index()
     {
         $series = Serie::with(['director','platform','actors','audios','subtitles'])->simplePaginate(5);
-
-        $this->console_log($series);
         return view('Series/index')->with('series',$series);
     }
 

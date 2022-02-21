@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 
 route::get('/','App\Http\Controllers\PlatformController@home');
+
+route::get('/login','App\Http\Controllers\AuthController@login');
+route::post('/login','App\Http\Controllers\AuthController@authenticate');
+route::get('/logout','App\Http\Controllers\AuthController@logout');
+
 route::get('/platforms','App\Http\Controllers\PlatformController@index');
 route::get('/platforms/create','App\Http\Controllers\PlatformController@create');
 route::post('/platforms/store','App\Http\Controllers\PlatformController@store');

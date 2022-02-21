@@ -27,8 +27,9 @@
                     <i class="bi-house-fill"></i> Inicio
                 </a>
             </li>
-            <li class="nav-item">
 
+            @auth
+            <li class="nav-item">
                 <a class="btn btn-lg btn-outline-success" href="/platforms">
                     <i class="bi-pc-display"></i> Plataformas
                 </a>
@@ -53,16 +54,21 @@
                     <i class="bi-film"></i> Series
                 </a>
             </li>
-            <li class="nav-item self-right">
-                <a class="btn btn-lg btn-outline-primary" href="/login">
-                    <i class="bi-door-open-fill"></i> Iniciar sesión
-                </a>
-            </li>
-            <li class="nav-item self-right">
-                <a class="btn btn-lg btn-outline-danger">
-                    <i class="bi-door-open-fill"></i> Cerrar sesión
-                </a>
-            </li>
+            @endauth
+            @guest
+                <li class="nav-item self-right">
+                    <a class="btn btn-lg btn-outline-primary" href="/login">
+                        <i class="bi-door-open-fill"></i> Iniciar sesión
+                    </a>
+                </li>
+            @endguest
+            @auth
+                <li class="nav-item self-right">
+                    <a class="btn btn-lg btn-outline-danger" href="/logout">
+                        <i class="bi-door-open-fill"></i> Cerrar sesión
+                    </a>
+                </li>
+            @endauth
         </ul>
     </nav>
     <div class="container">

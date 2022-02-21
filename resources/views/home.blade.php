@@ -24,9 +24,11 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        {{$platforms->links()}}
+    </div>
 </div>
 
-{{$platforms->links('')}}
 
 
 @endsection()
