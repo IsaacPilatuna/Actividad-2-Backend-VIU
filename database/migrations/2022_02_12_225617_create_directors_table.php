@@ -20,6 +20,7 @@ class CreateDirectorsTable extends Migration
             $table->date('dateOfBirth')->nullable(false);
             $table->string('nationality')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

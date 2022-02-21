@@ -27,6 +27,7 @@ class CreateSeriesActorsTable extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
 
         });
     }

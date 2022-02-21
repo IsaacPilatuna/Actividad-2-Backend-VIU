@@ -17,6 +17,7 @@ class CreateLanguagesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable(false);
             $table->string('isoCode')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

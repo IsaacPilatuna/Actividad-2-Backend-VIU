@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActorController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\SerieController;
 
 
 /*
@@ -16,48 +22,60 @@ use Illuminate\Support\Facades\Route;
 
 
 route::get('/','App\Http\Controllers\PlatformController@home');
+Route::prefix('login')->group(function(){
+    route::get('/',['as'=>'login','uses'=>'App\Http\Controllers\AuthController@login']);
+    route::post('/','App\Http\Controllers\AuthController@authenticate');
+});
 
-route::get('/login',['as'=>'login','uses'=>'App\Http\Controllers\AuthController@login']);
-route::post('/login','App\Http\Controllers\AuthController@authenticate');
 
 Route::middleware(['auth'])->group(
     function(){
         route::get('/logout','App\Http\Controllers\AuthController@logout');
 
-        route::get('/platforms','App\Http\Controllers\PlatformController@index');
-        route::get('/platforms/create','App\Http\Controllers\PlatformController@create');
-        route::post('/platforms/store','App\Http\Controllers\PlatformController@store');
-        route::get('/platforms/edit/{id}','App\Http\Controllers\PlatformController@edit');
-        route::put('/platforms/update/{id}','App\Http\Controllers\PlatformController@update');
-        route::delete('/platforms/delete/{id}','App\Http\Controllers\PlatformController@destroy');
+        Route::controller(PlatformController::class)->prefix('platforms')->group(function(){
+            route::get('/','index');
+            route::get('/create','create');
+            route::post('/store','store');
+            route::get('/edit/{id}','edit');
+            route::put('/update/{id}','update');
+            route::delete('/delete/{id}','destroy');
+        });
 
-        route::get('/actors','App\Http\Controllers\ActorController@index');
-        route::get('/actors/create','App\Http\Controllers\ActorController@create');
-        route::post('/actors/store','App\Http\Controllers\ActorController@store');
-        route::get('/actors/edit/{id}','App\Http\Controllers\ActorController@edit');
-        route::put('/actors/update/{id}','App\Http\Controllers\ActorController@update');
-        route::delete('/actors/delete/{id}','App\Http\Controllers\ActorController@destroy');
+        Route::controller(ActorController::class)->prefix('actors')->group(function(){
+            route::get('/','index');
+            route::get('/create','create');
+            route::post('/store','store');
+            route::get('/edit/{id}','edit');
+            route::put('/update/{id}','update');
+            route::delete('/delete/{id}','destroy');
+        });
 
-        route::get('/directors','App\Http\Controllers\DirectorController@index');
-        route::get('/directors/create','App\Http\Controllers\DirectorController@create');
-        route::post('/directors/store','App\Http\Controllers\DirectorController@store');
-        route::get('/directors/edit/{id}','App\Http\Controllers\DirectorController@edit');
-        route::put('/directors/update/{id}','App\Http\Controllers\DirectorController@update');
-        route::delete('/directors/delete/{id}','App\Http\Controllers\DirectorController@destroy');
+        Route::controller(DirectorController::class)->prefix('directors')->group(function(){
+            route::get('/','index');
+            route::get('/create','create');
+            route::post('/store','store');
+            route::get('/edit/{id}','edit');
+            route::put('/update/{id}','update');
+            route::delete('/delete/{id}','destroy');
+        });
 
-        route::get('/languages','App\Http\Controllers\LanguajeController@index');
-        route::get('/languages/create','App\Http\Controllers\LanguajeController@create');
-        route::post('/languages/store','App\Http\Controllers\LanguajeController@store');
-        route::get('/languages/edit/{id}','App\Http\Controllers\LanguajeController@edit');
-        route::put('/languages/update/{id}','App\Http\Controllers\LanguajeController@update');
-        route::delete('/languages/delete/{id}','App\Http\Controllers\LanguajeController@destroy');
+        Route::controller(LanguajeController::class)->prefix('languages')->group(function(){
+            route::get('/','index');
+            route::get('/create','create');
+            route::post('/store','store');
+            route::get('/edit/{id}','edit');
+            route::put('/update/{id}','update');
+            route::delete('/delete/{id}','destroy');
+        });
 
-        route::get('/series','App\Http\Controllers\SerieController@index');
-        route::get('/series/create','App\Http\Controllers\SerieController@create');
-        route::post('/series/store','App\Http\Controllers\SerieController@store');
-        route::get('/series/edit/{id}','App\Http\Controllers\SerieController@edit');
-        route::put('/series/update/{id}','App\Http\Controllers\SerieController@update');
-        route::delete('/series/delete/{id}','App\Http\Controllers\SerieController@destroy');
+        Route::controller(SerieController::class)->prefix('series')->group(function(){
+            route::get('/','index');
+            route::get('/create','create');
+            route::post('/store','store');
+            route::delete('/delete/{id}','destroy');
+        });
+
+
     }
 );
 

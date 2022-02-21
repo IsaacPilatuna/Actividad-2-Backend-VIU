@@ -19,6 +19,7 @@ class CreateSeriesTable extends Migration
             $table->unsignedInteger('platformId');
             $table->unsignedInteger('directorId');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('platformId')
                 ->references('id')
                 ->on('platforms')

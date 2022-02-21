@@ -19,6 +19,7 @@ class CreateActorsTable extends Migration
             $table->string('lastName')->nullable(false);
             $table->date('dateOfBirth')->nullable(false);
             $table->string('nationality')->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

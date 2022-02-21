@@ -19,6 +19,7 @@ class CreateSeriesLanguagesTable extends Migration
             $table->unsignedInteger('serieId');
             $table->string('type')->nullable(false);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('languageId')
                 ->references('id')
                 ->on('languages')
