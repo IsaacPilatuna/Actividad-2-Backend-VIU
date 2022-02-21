@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Language;
 use App\Models\Languaje;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class LanguajeController extends Controller
 {
@@ -15,8 +16,14 @@ class LanguajeController extends Controller
      */
     public function index()
     {
-        $languages = Language::simplePaginate(5);
-        return view('Languages/index')->with('languages',$languages);
+        try{
+            $languages = Language::simplePaginate(5);
+            return view('Languages/index')->with('languages',$languages);
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed_read')
+            ]);
+        }
     }
 
     /**
@@ -37,11 +44,17 @@ class LanguajeController extends Controller
      */
     public function store(Request $request)
     {
-        $language =new Language();
-        $language->name=$request->get('name');
-        $language->isoCode=$request->get('isoCode');
-        $language->save();
-        return redirect('/languages');
+        try{
+            $language =new Language();
+            $language->name=$request->get('name');
+            $language->isoCode=$request->get('isoCode');
+            $language->save();
+            return redirect('/languages')->with('success', Lang::get('alerts.success'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 
     /**
@@ -76,11 +89,17 @@ class LanguajeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $language = Language::find($id);
-        $language->name = $request->get('name');
-        $language->isoCode = $request->get('isoCode');
-        $language->save();
-        return redirect('/languages');
+        try{
+            $language = Language::find($id);
+            $language->name = $request->get('name');
+            $language->isoCode = $request->get('isoCode');
+            $language->save();
+            return redirect('/languages')->with('success', Lang::get('alerts.success'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
 
     }
 
@@ -92,8 +111,14 @@ class LanguajeController extends Controller
      */
     public function destroy($id)
     {
-        $language= Language::find($id);
-        $language->delete();
-        return redirect('/languages');
+        try{
+            $language= Language::find($id);
+            $language->delete();
+            return redirect('/languages')->with('info', Lang::get('alerts.deleted'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 }

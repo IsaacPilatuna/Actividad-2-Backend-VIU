@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Director;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Lang;
 
 class DirectorController extends Controller
 {
@@ -15,8 +15,14 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $director = Director::simplePaginate(5);;
-        return view('Directors/index')->with('directors',$director);
+        try{
+            $director = Director::simplePaginate(5);;
+            return view('Directors/index')->with('directors',$director);
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed_read')
+            ]);
+        }
     }
 
     /**
@@ -37,13 +43,19 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        $director =new Director();
-        $director->firstName=$request->get('firstName');
-        $director->lastName=$request->get('lastName');
-        $director->dateOfBirth=$request->get('dateOfBirth');
-        $director->nationality=$request->get('nationality');
-        $director->save();
-        return redirect('/directors');
+        try{
+            $director =new Director();
+            $director->firstName=$request->get('firstName');
+            $director->lastName=$request->get('lastName');
+            $director->dateOfBirth=$request->get('dateOfBirth');
+            $director->nationality=$request->get('nationality');
+            $director->save();
+            return redirect('/directors')->with('success', Lang::get('alerts.success'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 
     /**
@@ -78,13 +90,19 @@ class DirectorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $director = Director::find($id);
-        $director->firstName = $request->get('firstName');
-        $director->lastName = $request->get('lastName');
-        $director->dateOfBirth = $request->get('dateOfBirth');
-        $director->nationality = $request->get('nationality');
-        $director->save();
-        return redirect('/directors');
+        try{
+            $director = Director::find($id);
+            $director->firstName = $request->get('firstName');
+            $director->lastName = $request->get('lastName');
+            $director->dateOfBirth = $request->get('dateOfBirth');
+            $director->nationality = $request->get('nationality');
+            $director->save();
+            return redirect('/directors')->with('success', Lang::get('alerts.success'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
 
     }
 
@@ -96,8 +114,14 @@ class DirectorController extends Controller
      */
     public function destroy($id)
     {
-        $director= Director::find($id);
-        $director->delete();
-        return redirect('/directors');
+        try{
+            $director= Director::find($id);
+            $director->delete();
+            return redirect('/directors')->with('info', Lang::get('alerts.deleted'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 }

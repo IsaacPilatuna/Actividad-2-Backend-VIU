@@ -10,11 +10,11 @@
             @csrf
             <div class="form-group">
                 <label for="name" class="form-label">Nombre</label>
-                <input id="name" name="name" type="text" class="form-control" value={{$language->name}}>
+                <input id="name" name="name" type="text" class="form-control" value="{{$language->name}}">
             </div>
             <div class="form-group">
                 <label for="isoCode" class="form-label">Codigo ISO</label>
-                <input id="isoCode" name="isoCode" type="text" class="form-control" value={{$language->isoCode}}>
+                <input id="isoCode" name="isoCode" type="text" class="form-control" value="{{$language->isoCode}}">
             </div>
 
         </form>

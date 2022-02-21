@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\Platform;
+use Illuminate\Support\Facades\Lang;
 
 class PlatformController extends Controller
 {
@@ -14,9 +15,14 @@ class PlatformController extends Controller
      */
     public function home()
     {
-
-        $platforms = Platform::simplePaginate(5);
-        return view('home')->with('platforms',$platforms);
+        try{
+            $platforms = Platform::simplePaginate(5);
+            return view('home')->with('platforms',$platforms);
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed_read')
+            ]);
+        }
 
     }
 
@@ -45,11 +51,16 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $platform =new Platform();
-        $platform->name=$request->get('name');
-        $platform->save();
-
-        return redirect('/platforms');
+        try{
+            $platform =new Platform();
+            $platform->name=$request->get('name');
+            $platform->save();
+            return redirect('/platforms')->with('success', Lang::get('alerts.success'));;
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 
     /**
@@ -84,11 +95,16 @@ class PlatformController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $platform = Platform::find($id);
-        $platform->name=$request->get('name');
-        $platform->save();
-
-        return redirect('/platforms');
+        try{
+            $platform = Platform::find($id);
+            $platform->name=$request->get('name');
+            $platform->save();
+            return redirect('/platforms')->with('success', Lang::get('alerts.success'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 
     /**
@@ -99,8 +115,14 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        $platform = Platform::find($id);
-        $platform->delete();
-        return redirect('/platforms');
+        try{
+            $platform = Platform::find($id);
+            $platform->delete();
+            return redirect('/platforms')->with('info', Lang::get('alerts.deleted'));
+        }catch (\Throwable $th) {
+            return back()->withErrors([
+                'error' =>  Lang::get('alerts.failed')
+            ]);
+        }
     }
 }

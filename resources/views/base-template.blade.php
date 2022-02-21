@@ -71,6 +71,7 @@
             @endauth
         </ul>
     </nav>
+    @include('alerts')
     <div class="container">
         @yield('content')
     </div>

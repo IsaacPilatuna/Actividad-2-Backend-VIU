@@ -35,6 +35,7 @@
                         <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control">
                     </div>
                 </form>
+                @include('alerts')
             </div>
             <div class="buttons-container">
                 <button class="btn btn-primary" type="submit" form="form">

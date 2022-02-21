@@ -20,7 +20,7 @@ class AuthController extends Controller
         if(is_null($user)){
             return view('login');
         }else{
-            redirect("/");
+            return redirect("/");
         }
     }
 
