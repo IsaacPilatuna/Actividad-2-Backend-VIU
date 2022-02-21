@@ -48,6 +48,8 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer">
         {{$actors->links()}}
     </div>
 </div>

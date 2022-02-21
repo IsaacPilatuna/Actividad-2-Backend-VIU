@@ -44,6 +44,8 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        {{$languages->links()}}
+    </div>
 </div>
-{{$languages->links()}}
 @endsection()

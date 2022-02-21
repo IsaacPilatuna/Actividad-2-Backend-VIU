@@ -49,6 +49,9 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        {{$directors->links()}}
+    </div>
 </div>
 {{$directors->links()}}
 @endsection()

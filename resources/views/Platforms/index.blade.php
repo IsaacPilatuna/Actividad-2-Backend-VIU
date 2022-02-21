@@ -41,6 +41,8 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer">
         {{$platforms->links()}}
     </div>
 </div>

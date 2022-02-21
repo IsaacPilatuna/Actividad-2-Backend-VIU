@@ -85,3 +85,8 @@ table.table th{
 tbody tr:hover{
     background-color: rgba(51, 224, 255, 0.25);
 }
+
+.pagination{
+    justify-content: center;
+    margin-bottom: 0;
+}

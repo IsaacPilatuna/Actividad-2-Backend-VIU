@@ -65,6 +65,9 @@
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        {{$series->links()}}
+    </div>
 </div>
 {{$series->links()}}
 @endsection()
