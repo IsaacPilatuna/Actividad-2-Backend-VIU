@@ -14,14 +14,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ActorsSeeder::class,
-            DirectorsSeeder::class,
-            LanguagesSeeder::class,
-            PlatformsSeeder::class,
-            SeriesSeeder::class,
-            SeriesActorsSeeder::class,
-            SeriesLanguagesSeeder::class,
+            ActorsTableSeeder::class,
+            DirectorsTableSeeder::class,
+            LanguagesTableSeeder::class,
+            PlatformsTableSeeder::class,
+            SeriesTableSeeder::class,
+            SeriesActorsTableSeeder::class,
+            SeriesLanguagesTableSeeder::class,
             UsersSeeder::class
         ]);
+        $this->call(ActorsTableSeeder::class);
+        $this->call(LanguagesTableSeeder::class);
+        $this->call(PlatformsTableSeeder::class);
+        $this->call(SeriesActorsTableSeeder::class);
+        $this->call(SeriesLanguagesTableSeeder::class);
+        $this->call(SeriesTableSeeder::class);
     }
 }
