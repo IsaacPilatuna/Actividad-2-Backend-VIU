@@ -7,7 +7,9 @@
 - En la base de datos de preferencia (MySQL/PostgreSQL) crear una nueva base de datos
 - Clonar el proyecto
 - En la raíz del proyecto correr el comando:
+```markdown
 > composer install
+```
 - Para generar el archivo .env correr el comando:
 > copy .env.example .env
 - Una vez generado el archivo .env configurar la base de datos
