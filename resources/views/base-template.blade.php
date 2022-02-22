@@ -20,57 +20,62 @@
 
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="/">
-            <img src="/assets/images/logoVIU.png"  height="64" alt="Logo VIU">
+            <img src="/assets/images/logoVIU.png" height="64" alt="Logo VIU">
         </a>
-        <ul class="navbar-nav w-100">
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/">
-                    <i class="bi-house-fill"></i> Inicio
-                </a>
-            </li>
+        <button class="btn btn-lg btn-success navbar-toggler" type="button"data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/">
+                        <i class="bi-house-fill"></i> Inicio
+                    </a>
+                </li>
 
-            @auth
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/platforms">
-                    <i class="bi-pc-display"></i> Plataformas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/actors">
-                    <i class="bi-person-badge-fill"></i> Actores
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/directors">
-                    <i class="bi-person-workspace"></i> Directores
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/languages">
-                    <i class="bi-globe"></i> Idiomas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-lg btn-outline-success" href="/series">
-                    <i class="bi-film"></i> Series
-                </a>
-            </li>
-            @endauth
-            @guest
+                @auth
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/platforms">
+                        <i class="bi-pc-display"></i> Plataformas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/actors">
+                        <i class="bi-person-badge-fill"></i> Actores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/directors">
+                        <i class="bi-person-workspace"></i> Directores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/languages">
+                        <i class="bi-globe"></i> Idiomas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-lg btn-outline-success" href="/series">
+                        <i class="bi-film"></i> Series
+                    </a>
+                </li>
+                @endauth
+                @guest
                 <li class="nav-item self-right">
                     <a class="btn btn-lg btn-outline-primary" href="/login">
                         <i class="bi-door-open-fill"></i> Iniciar sesión
                     </a>
                 </li>
-            @endguest
-            @auth
+                @endguest
+                @auth
                 <li class="nav-item self-right">
                     <a class="btn btn-lg btn-outline-danger" href="/logout">
                         <i class="bi-door-open-fill"></i> Cerrar sesión
                     </a>
                 </li>
-            @endauth
-        </ul>
+                @endauth
+            </ul>
+        </div>
     </nav>
     @include('alerts')
     <div class="container">

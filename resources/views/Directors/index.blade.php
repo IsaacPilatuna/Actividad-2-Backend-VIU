@@ -12,7 +12,7 @@
     <div class="card-body">
         <form  action="/directors" method="POST">
             @csrf
-            <div class="form-group">
+            <div class="form-group search">
                 <input type="text" class="form-control" placeholder="Buscar directores" name="searchString" value="{{$searchString}}">
                 <div class="input-group-prepend">
                     <button class="input-group-text"><i class="bi bi-search"></i> </button>

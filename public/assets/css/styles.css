@@ -72,6 +72,7 @@ table.table th{
 
 .btn-lg{
     font-size: 1.5rem;
+    width: 100%;
 }
 
 .btn-primary{
@@ -91,8 +92,13 @@ table.table th{
 
 .form-group{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: .5rem;
+}
+
+.form-group.search{
+    flex-direction: row;
 }
 
 tbody tr:hover{
@@ -113,12 +119,20 @@ tbody tr:hover{
     color: navy;
 }
 
-.form-control{
-max-width: 512px;
-}
 
 .no-results{
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.navbar-brand{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-toggler{
+    background-color: #198754;
+    border: #198754;
 }

@@ -12,7 +12,7 @@
     <div class="card-body">
         <form  action="/platforms" method="POST">
             @csrf
-            <div class="form-group">
+            <div class="form-group search">
                 <input type="text" class="form-control" placeholder="Buscar plataformas" name="searchString" value="{{$searchString}}">
                 <div class="input-group-prepend">
                     <button class="input-group-text"><i class="bi bi-search"></i> </button>
