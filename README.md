@@ -35,3 +35,12 @@ Para ejecutar el servidor de manera local
 ```markdown
 php artisan serve
 ```
+
+Para iniciar sesión en la aplicación se puede usar las credenciales:
+```markdown
+user1@email.com
+```
+```markdown
+password
+```
+
