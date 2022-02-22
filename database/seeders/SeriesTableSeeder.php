@@ -22,7 +22,7 @@ class SeriesTableSeeder extends Seeder
         DB::table('Series')->insert(array (
             0 =>
             array (
-                'id' => 4,
+                'id' => 1,
                 'title' => 'Los juegos del hambre',
                 'platformId' => 1,
                 'directorId' => 2,

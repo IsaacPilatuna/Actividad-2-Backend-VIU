@@ -23,11 +23,5 @@ class DatabaseSeeder extends Seeder
             SeriesLanguagesTableSeeder::class,
             UsersSeeder::class
         ]);
-        $this->call(ActorsTableSeeder::class);
-        $this->call(LanguagesTableSeeder::class);
-        $this->call(PlatformsTableSeeder::class);
-        $this->call(SeriesActorsTableSeeder::class);
-        $this->call(SeriesLanguagesTableSeeder::class);
-        $this->call(SeriesTableSeeder::class);
     }
 }
